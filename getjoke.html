@@ -13,9 +13,9 @@
     var url = "https://discordapp.com/api/webhooks/359829341670080514/_Lh6N1M9VRg_J4BAmOncyX9zqK9FCaDvnaeqDdgDG9gEaWy32mzYv9FGjs_Pj-RCtarG";
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/json");
-    var data = {};
-    data.content = "Ping";
-    xhr.send(JSON.stringify(data));
+    var ping = {};
+    ping.content = "Ping";
+    xhr.send(JSON.stringify(ping));
     
     console.log(data)
     //window.location.href = 'https://tjakubo2.github.io/TTS_dadjoke/success?response=' + data
