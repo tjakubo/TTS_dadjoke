@@ -11,7 +11,7 @@
     // Ping a discord
     var xhr = new XMLHttpRequest();
     var url = "https://discordapp.com/api/webhooks/359829341670080514/_Lh6N1M9VRg_J4BAmOncyX9zqK9FCaDvnaeqDdgDG9gEaWy32mzYv9FGjs_Pj-RCtarG";
-    xhr.open("POST", url, true);
+    xhr.open("POST", url, false);
     xhr.setRequestHeader("Content-type", "application/json");
     var ping = {};
     ping.content = "Ping";
