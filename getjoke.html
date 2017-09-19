@@ -29,7 +29,7 @@
   xhr.onload = function() {
     var status = xhr.status;
     if (status === 200) {
-      respond(xhr.response.joke);
+      respond(JSON.parse(xhr.response).joke);
     } else {
       error();
     }
