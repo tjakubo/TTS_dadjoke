@@ -8,6 +8,7 @@
 <script>
   
   var xmlHttp = new XMLHttpRequest();
+  xmlHttp.setRequestHeader('Accept', 'application/json');
   xmlHttp.open( "GET", "https://icanhazdadjoke.com/", false ); // false for synchronous request
   xmlHttp.send( null );
   console.log(xmlHttp.responseText);
@@ -15,6 +16,7 @@
   var xhr = new XMLHttpRequest();
   xhr.open('GET', "https://icanhazdadjoke.com/", true);
   xhr.responseType = "application/json";
+  xhr.setRequestHeader('Accept', 'application/json');
   xhr.onload = function() {
     var status = xhr.status;
     if (status === 200) {
