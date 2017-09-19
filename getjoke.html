@@ -7,12 +7,19 @@
 
 <script>
   
-  var xmlHttp = new XMLHttpRequest();
-  xmlHttp.open( "GET", "https://icanhazdadjoke.com/", false ); // false for synchronous request
-  xmlHttp.setRequestHeader('Accept', 'application/json');
-  xmlHttp.send( null );
-  console.log(xmlHttp.responseText);
-
+  function respond(data) {
+    // Ping a discord
+    xhr = new XMLHttpRequest();
+    var url = "https://discordapp.com/api/webhooks/359829341670080514/_Lh6N1M9VRg_J4BAmOncyX9zqK9FCaDvnaeqDdgDG9gEaWy32mzYv9FGjs_Pj-RCtarG";
+    xhr.open("POST", url, false);
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send("ping");
+    
+    window.location.href = 'https://tjakubo2.github.io/TTS_dadjoke/success?response=' + data
+  }
+  function error() {
+    window.location.href = 'https://tjakubo2.github.io/TTS_dadjoke/error'
+  }
   var xhr = new XMLHttpRequest();
   xhr.open('GET', "https://icanhazdadjoke.com/", true);
   xhr.responseType = "application/json";
@@ -20,12 +27,11 @@
   xhr.onload = function() {
     var status = xhr.status;
     if (status === 200) {
-      console.log(xhr.response);
+      respond(xhr.response.joke);
     } else {
-      console.log('error');
+      error();
     }
   };
   xhr.send();
-    
-  //https://discordapp.com/api/webhooks/359829341670080514/_Lh6N1M9VRg_J4BAmOncyX9zqK9FCaDvnaeqDdgDG9gEaWy32mzYv9FGjs_Pj-RCtarG
+  
 </script>
