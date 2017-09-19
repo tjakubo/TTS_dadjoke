@@ -1,20 +1,24 @@
 <html>
 <header><title>Dad jokes for TTS</title></header>
 <body>
-  Your dad joke is on the way, courtesy of icanhazdadjoke.com ....
+  Your dad joke is on its way, courtesy of icanhazdadjoke.com ....
 </body>
 </html>
 
 <script>
 
-  var xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function() { 
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-            //callback(xmlHttp.responseText);
-            console.log(xmlHttp.responseText)
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', "https://icanhazdadjoke.com/", true);
+  xhr.responseType = 'json';
+  xhr.onload = function() {
+    var status = xhr.status;
+    if (status === 200) {
+      console.log(JOSN.stringify(xhr.response));
+    } else {
+      console.log('error');
     }
-    xmlHttp.open("GET", "https://icanhazdadjoke.com/", true);
-    xmlHttp.send(null);
+  };
+  xhr.send();
     
   //https://discordapp.com/api/webhooks/359829341670080514/_Lh6N1M9VRg_J4BAmOncyX9zqK9FCaDvnaeqDdgDG9gEaWy32mzYv9FGjs_Pj-RCtarG
 </script>
