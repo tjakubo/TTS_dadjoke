@@ -25,7 +25,6 @@
   }
   var xhr = new XMLHttpRequest();
   xhr.open('GET', "https://icanhazdadjoke.com/", true);
-  xhr.responseType = "application/json";
   xhr.setRequestHeader('Accept', 'application/json');
   xhr.onload = function() {
     var status = xhr.status;
