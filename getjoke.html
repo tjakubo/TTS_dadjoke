@@ -7,21 +7,14 @@
 
 <script>
   
-  var xmlhttp = new XMLHttpRequest();
-  var url = "https://icanhazdadjoke.com/";
-
-  xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        var myArr = JSON.parse(this.responseText);
-        console.log(this.responseText);
-    }
-  };
-  xmlhttp.open("GET", url, true);
-  xmlhttp.send();
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.open( "GET", "https://icanhazdadjoke.com/", false ); // false for synchronous request
+  xmlHttp.send( null );
+  console.log(xmlHttp.responseText;)
 
   var xhr = new XMLHttpRequest();
   xhr.open('GET', "https://icanhazdadjoke.com/", true);
-  xhr.responseType = "text/plain";
+  xhr.responseType = "application/json";
   xhr.onload = function() {
     var status = xhr.status;
     if (status === 200) {
