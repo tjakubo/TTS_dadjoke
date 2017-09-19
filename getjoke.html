@@ -6,6 +6,18 @@
 </html>
 
 <script>
+  
+  var xmlhttp = new XMLHttpRequest();
+  var url = "myTutorials.txt";
+
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var myArr = JSON.parse(this.responseText);
+        console.log(this.responseText);
+    }
+  };
+  xmlhttp.open("GET", url, true);
+  xmlhttp.send();
 
   var xhr = new XMLHttpRequest();
   xhr.open('GET', "https://icanhazdadjoke.com/", true);
