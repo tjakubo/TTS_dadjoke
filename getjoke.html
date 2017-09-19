@@ -9,11 +9,13 @@
   
   function respond(data) {
     // Ping a discord
-    var xhr2 = new XMLHttpRequest();
+    var xhr = new XMLHttpRequest();
     var url = "https://discordapp.com/api/webhooks/359829341670080514/_Lh6N1M9VRg_J4BAmOncyX9zqK9FCaDvnaeqDdgDG9gEaWy32mzYv9FGjs_Pj-RCtarG";
-    xhr2.open("POST", url, false);
-    xhr2.setRequestHeader("Content-type", "application/json");
-    xhr2.send("ping");
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json");
+    var data = {};
+    data.content = "Ping";
+    xhr.send(JSON.stringify(data));
     
     console.log(data)
     //window.location.href = 'https://tjakubo2.github.io/TTS_dadjoke/success?response=' + data
