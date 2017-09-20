@@ -35,10 +35,11 @@
     ping.content = "Ping"
     xhr.send(JSON.stringify(ping))
     
-    console.log(data)
-    //window.location.href = "https://tjakubo2.github.io/TTS_dadjoke/success?elapsed=" + data.time + "&response=' + data.joke
+    // REDIRECT (success)
+    window.location.href = "https://tjakubo2.github.io/TTS_dadjoke/success?elapsed=" + data.time + "&response=' + data.joke
   }
   function error() {
+    // REDIRECT (error)
     window.location.href = "https://tjakubo2.github.io/TTS_dadjoke/error"
   }
   // Send a joke request
@@ -65,14 +66,11 @@
         } else {
           timeString = "around " + Math.round(timeDiff.getTime()/360000)/10 + " hour(s)"
         }
-        
         data.time = timeString
-        console.log(timeString)
         
         // WRITE LAST JOKE TIME TO THE DATABASE
         firebase.database().ref("/lastJokeTime").set(currTime).then( function() {
           // Database write callback
-          console.log("write successful")
           respond(data)
         })
       })
