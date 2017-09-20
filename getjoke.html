@@ -35,8 +35,13 @@
     ping.content = "Ping"
     xhr.send(JSON.stringify(ping))
     
+    if (data.debug == "true") {
+      console.log(data)
+      return null
+    }
+    
     // REDIRECT (success)
-    window.location.href = "https://tjakubo2.github.io/TTS_dadjoke/success?elapsed=" + data.time + "&response=' + data.joke
+    window.location.href = "https://tjakubo2.github.io/TTS_dadjoke/success?elapsed=" + data.time + "&response=" + data.joke
   }
   function error() {
     // REDIRECT (error)
@@ -51,6 +56,8 @@
     var status = xhr.status
     if (status === 200) {
       var data = JSON.parse(xhr.response)
+      // Set the debug flag 
+      data.debug = (new URLSearchParams(window.location.search).get("debug")) || "false"
       // READ LAST JOKE TIME FROM DATABASE
       firebase.database().ref("/lastJokeTime").once('value').then(function(snap) {
         // Database read callback
