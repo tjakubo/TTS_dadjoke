@@ -56,7 +56,7 @@
         // Get the last joke time, save the time difference
         var lastJokeTime = snap.val() || 0
         var currTime = new Date().getTime()
-        var timeDiff = newDate(currTime - lastJokeTime)
+        var timeDiff = new Date(currTime - lastJokeTime)
         var timeString = timeDiff.getHours() + " hours, " + timeDiff.getMinutes() + ", minutes " + timeDiff.getSeconds() + " seconds"
         data.time = timeString
         console.log(timeString)
