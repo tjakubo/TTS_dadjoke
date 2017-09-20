@@ -63,7 +63,7 @@
         } else if (timeDiff.getTime()/60000 < 60) {
           timeString = Math.ceil(timeDiff.getTime()/60000) + " minute(s)"
         } else {
-          timeString = "around " + timeDiff.getTime()/3600000 + " hour(s)"
+          timeString = "around " + Math.round(timeDiff.getTime()/360000)/10 + " hour(s)"
         }
         
         data.time = timeString
