@@ -5,31 +5,69 @@
 </body>
 </html>
 
+
+
+<script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
 <script>
-  
+  // FIREBASE INITIALIZATION
+  // Get the snippet from console -> "Add Firebase to your web app" 
+  var config = {
+    apiKey: "AIzaSyBQX8B0vHIxefSNM8NVQ8OR5BEidBrveYU",
+    authDomain: "dz-example-database.firebaseapp.com",
+    databaseURL: "https://dz-example-database.firebaseio.com",
+    projectId: "dz-example-database",
+    storageBucket: "dz-example-database.appspot.com",
+    messagingSenderId: "404914956882"
+  };
+  firebase.initializeApp(config);
+ 
+  // Callback once succesfully processed all the data
   function respond(data) {
-    // Ping a discord
+    
+    // SEND A MESSAGE TO A DISCORD SERVER
     var xhr = new XMLHttpRequest();
+    // This is the webhook URL you can get from Webhooks menu
     var url = "https://discordapp.com/api/webhooks/359829341670080514/_Lh6N1M9VRg_J4BAmOncyX9zqK9FCaDvnaeqDdgDG9gEaWy32mzYv9FGjs_Pj-RCtarG";
     xhr.open("POST", url, false);
     xhr.setRequestHeader("Content-type", "application/json");
     var ping = {};
+    // This is the sent message
     ping.content = "Ping";
     xhr.send(JSON.stringify(ping));
     
     console.log(data)
-    window.location.href = 'https://tjakubo2.github.io/TTS_dadjoke/success?response=' + data
+    //window.location.href = "https://tjakubo2.github.io/TTS_dadjoke/success?elapsed=" + data.time + "&response=' + data.joke
   }
   function error() {
-    window.location.href = 'https://tjakubo2.github.io/TTS_dadjoke/error'
+    window.location.href = "https://tjakubo2.github.io/TTS_dadjoke/error"
   }
+  // Send a joke request
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', "https://icanhazdadjoke.com/", true);
-  xhr.setRequestHeader('Accept', 'application/json');
+  xhr.open("GET", "https://icanhazdadjoke.com/", true);
+  xhr.setRequestHeader("Accept", "application/json");
   xhr.onload = function() {
+    // Joke request receive callback
     var status = xhr.status;
     if (status === 200) {
-      respond(JSON.parse(xhr.response).joke);
+      var data = JSON.parse(xhr.response)
+      // READ LAST JOKE TIME FROM DATABASE
+      firebase.database().ref("/lastJokeTime").once('value').then(function(snap) {
+        // Database read callback
+        // Get the last joke time, save the time difference
+        var lastJokeTime = snap.val() || 0
+        var currTime = new Date().getTime()
+        var timeDiff = newDate(currTime - lastJokeTime)
+        var timeString = timeDiff.getHours() + " hours, " + timeDiff.getMinutes() + ", minutes " + timeDiff.getSeconds() + " seconds"
+        data.time = timeString
+        console.log(timeString)
+        
+        // WRITE LAST JOKE TIME TO THE DATABASE
+        firebase.database().ref("/lastJokeTime").set(currTime).then( function() {
+          // Database write callback
+          console.log("write successful")
+          respond(data)
+        }
+      });
     } else {
       error();
     }
