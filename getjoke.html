@@ -57,7 +57,15 @@
         var lastJokeTime = snap.val() || 0
         var currTime = new Date().getTime()
         var timeDiff = new Date(currTime - lastJokeTime)
-        var timeString = timeDiff.getHours() + " hours, " + timeDiff.getMinutes() + ", minutes " + timeDiff.getSeconds() + " seconds"
+        var timeString
+        if (timeDiff.getTime()/1000 < 60) {
+          timeString = Math.ceil(timeDiff.getTime()/1000) + " second(s)"
+        } else if (timeDiff.getTime()/60000 < 60) {
+          timeString = Math.ceil(timeDiff.getTime()/60000) + " minute(s)"
+        } else {
+          timeString = "around " + timeDiff.getTime()/3600000 + " hour(s)"
+        }
+        
         data.time = timeString
         console.log(timeString)
         
