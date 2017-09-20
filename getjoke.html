@@ -51,6 +51,7 @@
   var xhr = new XMLHttpRequest()
   xhr.open("GET", "https://icanhazdadjoke.com/", true)
   xhr.setRequestHeader("Accept", "application/json")
+  xhr.setRequestHeader("User-Agent", "My repo https://github.com/tjakubo2/TTS_dadjoke")
   xhr.onload = function() {
     // Joke request receive callback
     var status = xhr.status
